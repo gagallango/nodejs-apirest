@@ -1,7 +1,14 @@
 <div class="container tuits-index">
 
     <h4>Tuit</h4>
-    <p>Content: {{content}}</p>
-    <p>Creator: {{creatorID}}</p>
+
+    <p><b>Content</b>: {{content}}</p>
+    <p><b>Creator</b>: {{creatorID.username}}</p>
+    <p><b>Posted on</b>: {{createdAt}}</p>
+
+    <form action="{{_id}}/delete" method="POST">
+        <a class="delete" type="submit">Delete</a>
+    </form>
+
 
 </div>

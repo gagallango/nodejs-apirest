@@ -11,7 +11,8 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    userTuits: [{ type: Schema.Types.ObjectId, ref: 'Tuit' }]
+    userTuits: [{ type: Schema.Types.ObjectId, ref: 'Tuit' }],
+    likedTuits: [{ type: Schema.Types.ObjectId, ref: 'Tuit' }]
 }, {
     timestamps: true
 })

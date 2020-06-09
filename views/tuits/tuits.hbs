@@ -4,8 +4,8 @@
     <div class="tuit">
         <h4>{{title}}</h4>
         <p>{{content}}</p>
-        <p>{{creatorID}}</p>
-        <a href="/tuits/{{_id}}">See tuit details</a>
+        <p>{{creatorID.username}}</p>
+        <a class="options" href="/tuits/{{_id}}">See tuit details</a>
     </div>
     {{/each}}
 </div>
