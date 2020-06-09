@@ -1,23 +1,16 @@
-<div class="container">
-
-    <div class="row">
-
-        <div class="col-md-6">
-            <h1 style="font-weight: 100">New tuit</h1>
+<div>
+    <h3>New tuit</h3>
+    <form action="/tuits/new" method="POST">
+        <div class="form-group">
+            <label for="title-input">Title</label>
+            <input name="title" type="text" class="form-control" id="title-input">
         </div>
-
-        <div class="col-md-6">
-
-            <form action="/tuits/new" method="POST">
-                <div class="form-group">
-                    <label for="content-input">Content</label>
-                    <input name="content" type="text" class="form-control" id="content-input">
-                </div>
-                <button type="submit" class="btn btn-dark">Create new tuit</button>
-                <a href="/" class="btn btn-dark">Back</a>
-
-            </form>
+        <div class="form-group">
+            <label for="content-input">Content</label>
+            <input name="content" type="text" class="form-control" id="content-input">
         </div>
+        <button type="submit" class="btn btn-light">Create new tuit</button>
+        <a href="/" class="btn btn-light">Back</a>
 
-    </div>
+    </form>
 </div>

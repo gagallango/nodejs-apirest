@@ -1,9 +1,11 @@
 <div class="container tuits-index">
-    <a href="/new">Create new tuit</a>
-    <h1 style="font-weight: 100">Tuits</h1>
+    <h3>Tuits</h3>
     {{#each tuits}}
-    <h4>{{content}}</h4>
-    <p>{{creatorID}}</p>
-    <a href="/{{_id}}">See tuit details</a>
+    <div class="tuit">
+        <h4>{{title}}</h4>
+        <p>{{content}}</p>
+        <p>{{creatorID}}</p>
+        <a href="/tuits/{{_id}}">See tuit details</a>
+    </div>
     {{/each}}
 </div>

@@ -37,7 +37,8 @@ Promise.all([deleteUsers, deleteTuit])
             let tuits = []
             for (let i = 1; i <= 5; i++) {
                 tuits.push({
-                    content: faker.lorem.words(5),
+                    title: faker.lorem.words(3),
+                    content: faker.lorem.words(10),
                     creatorID: user._id,
                 })
             }

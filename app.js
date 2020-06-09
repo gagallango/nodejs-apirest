@@ -18,8 +18,8 @@ require('./configs/views.configs')(app)
 require('./configs/locals.config')(app)
 
 // Base URLS
-// app.use('/', require('./routes/index.routes'))
-// app.use('/', require('./routes/auth.routes'))
-app.use('/', require('./routes/tuits.routes'))
+app.use('/', require('./routes/index.routes'))
+app.use('/', require('./routes/auth.routes'))
+app.use('/tuits', require('./routes/tuits.routes'))
 
 module.exports = app
