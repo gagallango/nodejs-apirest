@@ -1,0 +1,13 @@
+<div class="container tuits-index">
+
+    <a href="/tuits/new" class="btn btn-dark">Crear nuevo tuit</a>
+
+    <h1 style="font-weight: 100">Índice de montañas rusas</h1>
+    {{#each tuits}}
+    <a href="/tuits/{{_id}}" class="btn btn-sm btn-dark">Ver detalles</a>
+    <h4>{{content}}</h4>
+    <p>{{creatorID}}</p>
+    {{/each}}
+
+
+</div>
