@@ -24,7 +24,8 @@ Promise.all([deleteUsers, deleteTuit])
             let user = {
                 username: faker.name.findName(),
                 password: bcrypt.hashSync('123', salt),
-                userTuits: [],
+                likedTuits: [],
+                userTuits: []
             }
             users.push(user)
         };
@@ -54,7 +55,7 @@ Promise.all([deleteUsers, deleteTuit])
     .then(() => {
         let promises = []
         allTuit.forEach(tuit => {
-            promises.push(User.findByIdAndUpdate(tuit.creatorID, { $push: { userTuits: tuit._id } }, { new: true }))
+            promises.push(User.findByIdAndUpdate(tuit.creatorID, { $push: { userTuits: tuit._id, likedTuits: tuit[randomNum(tuit._id)] } }, { new: true }))
         })
         return Promise.all(promises)
     })

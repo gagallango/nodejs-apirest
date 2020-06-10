@@ -6,14 +6,14 @@ const Tuit = require('./../models/tuit.model')
 const checkLoggedIn = (req, res, next) => req.isAuthenticated() ? next() : res.redirect('/')
 
 router.get('/favs', checkLoggedIn, (req, res, next) => res.render('tuits/liked-tuit'))
-router.post('/favs', checkLoggedIn, (req, res, next) => {
-    const { user, tuit } = req.body
-    let updateTuit = Tuit.findByIdAndUpdate(tuit, { $push: { likes: user } }, { new: true })
-    let updateUser = User.findByIdAndUpdate(user, { $push: { likedTuits: tuit } }, { new: true })
-    Promise.all([updateUser, updateTuit])
-        .then(favTuit => res.render('/tuits/favs', { tuit: favTuit }))
-        .catch(err => console.log(err))
-})
+// router.post('/favs', checkLoggedIn, (req, res, next) => {
+//     const { user, tuit } = req.body
+//     let updateTuit = Tuit.findByIdAndUpdate(tuit, { $push: { likes: user } }, { new: true })
+//     let updateUser = User.findByIdAndUpdate(user, { $push: { likedTuits: tuit } }, { new: true })
+//     Promise.all([updateUser, updateTuit])
+//         .then(favedTuit => res.render('/tuits/favs', { tuit: favedTuit }))
+//         .catch(err => console.log(err))
+// })
 
 router.get('/new', checkLoggedIn, (req, res, next) => res.render('tuits/new-tuit'))
 router.post('/new', (req, res, next) => {
@@ -42,10 +42,5 @@ router.get('/:id', checkLoggedIn, (req, res, next) => {
 
 })
 
-router.post('/:id/delete', checkLoggedIn, (req, res, next) => {
-    Tuit.findByIdAndRemove(req.params.id)
-        .then(() => res.redirect('/tuits'))
-        .catch(err => console.log('Error', err))
-})
 
 module.exports = router
