@@ -3,8 +3,10 @@ const router = express.Router()
 const User = require('./../models/user.model')
 const Tuit = require('./../models/tuit.model')
 
-router.get('/favs', (req, res, next) => res.render('tuits/liked-tuit'))
-router.post('/favs', (req, res, next) => {
+const checkLoggedIn = (req, res, next) => req.isAuthenticated() ? next() : res.redirect('/')
+
+router.get('/favs', checkLoggedIn, (req, res, next) => res.render('tuits/liked-tuit'))
+router.post('/favs', checkLoggedIn, (req, res, next) => {
     const { user, tuit } = req.body
     let updateTuit = Tuit.findByIdAndUpdate(tuit, { $push: { likes: user } }, { new: true })
     let updateUser = User.findByIdAndUpdate(user, { $push: { likedTuits: tuit } }, { new: true })
@@ -13,7 +15,7 @@ router.post('/favs', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
-router.get('/new', (req, res, next) => res.render('tuits/new-tuit'))
+router.get('/new', checkLoggedIn, (req, res, next) => res.render('tuits/new-tuit'))
 router.post('/new', (req, res, next) => {
     const { title, content } = req.body
     Tuit.create({ title, content, creatorID: req.user })
@@ -32,7 +34,7 @@ router.get('/', (req, res, next) => {
         .catch(err => console.log('Error', err))
 })
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', checkLoggedIn, (req, res, next) => {
     Tuit.findById(req.params.id)
         .populate('creatorID')
         .then(tuitDetails => res.render('tuits/tuit-det', tuitDetails))
@@ -40,7 +42,7 @@ router.get('/:id', (req, res, next) => {
 
 })
 
-router.post('/:id/delete', (req, res, next) => {
+router.post('/:id/delete', checkLoggedIn, (req, res, next) => {
     Tuit.findByIdAndRemove(req.params.id)
         .then(() => res.redirect('/tuits'))
         .catch(err => console.log('Error', err))
