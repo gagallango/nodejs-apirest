@@ -11,7 +11,7 @@ router.post('/favs', checkLoggedIn, (req, res, next) => {
     let updateTuit = Tuit.findByIdAndUpdate(tuit, { $push: { likes: user } }, { new: true })
     let updateUser = User.findByIdAndUpdate(user, { $push: { likedTuits: tuit } }, { new: true })
     Promise.all([updateUser, updateTuit])
-        .then(favedTuit => res.render('/tuits/favs', { tuit: favedTuit }))
+        .then(favTuit => res.render('/tuits/favs', { tuit: favTuit }))
         .catch(err => console.log(err))
 })
 
@@ -42,5 +42,10 @@ router.get('/:id', checkLoggedIn, (req, res, next) => {
 
 })
 
+router.post('/:id/delete', checkLoggedIn, (req, res, next) => {
+    Tuit.findByIdAndRemove(req.params.id)
+        .then(() => res.redirect('/tuits'))
+        .catch(err => console.log('Error', err))
+})
 
 module.exports = router
